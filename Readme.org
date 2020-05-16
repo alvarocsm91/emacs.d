@@ -192,3 +192,29 @@
    #+end_src
 
    Para más información [[https://orgmode.org/][org-mode]].
+
+** Org-link-minor-mode
+
+   Se trata de un modo menor de emacs, permite el uso del modo org y la
+   activación de sus links desde modos distintos al org, como puedan ser los
+   modos de programación, es muy útil para su uso en links a documentación
+   relativa desde el mismo archivo.
+
+   Antes de utilizarlo se debe clonar el paquete de github:
+
+   #+begin_src shell
+     $ git clone https://github.com/seanohalpin/org-link-minor-mode.git
+   #+end_src
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Org-link-moinor-mode
+     ;; (use-package org-link-minor-mode)
+     (when (file-exists-p (format "%s/.emacs.d/org-link-minor-mode/org-link-minor-mode.el" MyHomeDir))
+       (load-library (format "%s/.emacs.d/org-link-minor-mode/org-link-minor-mode.el" MyHomeDir)))
+
+     (require 'org)
+     (use-package org-link-minor-mode
+       :ensure t)
+   #+end_src
+
+   Para más información [[https://github.com/seanohalpin/org-link-minor-mode][org-link-minor-mode]].
