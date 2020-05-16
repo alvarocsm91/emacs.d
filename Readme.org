@@ -862,3 +862,15 @@
    #+end_src
 
    Para más información Link
+
+* Global features
+
+  Los siguientes apartados permiten la gestión de la apariencia y uso general de
+  emacs como herramienta, en el se definen distintos comandos generales que
+  utilizar desde cualquier punti, como las funcionalidades generales
+  implementacas, se incluyen aspectos como la apariencia respecto a usuario y de
+  las fuentes respecto al SO utilizado.
+
+   #+begin_src lisp :tangle init.el
+     ;;; Global features
+   #+end_src
