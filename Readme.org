@@ -657,3 +657,27 @@
    #+end_src
 
    Para más información [[https://gist.github.com/Ondiz/2fba1c143cd9d8682ea358082a202f1d][hunspell]].
+
+** Helm
+
+   Help nos permite realizar una búsqueda y autocompletar los comandos de lisp
+   integrando distintas herramientas de búsqueda como las cargadas en los
+   siguientes paquetes.
+
+   #+begin_src lisp :tangle init.el
+     (use-package helm
+       :init
+       (require 'helm-config)
+       (helm-mode 1)
+       (helm-autoresize-mode 1)
+       :config
+       (helm-autoresize-mode 1)
+       (global-set-key (kbd "M-x")     'helm-M-x)
+       (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+       (global-set-key (kbd "C-x b")   'helm-mini)
+       (global-set-key (kbd "C-x C-f") 'helm-find-files)
+       (define-key helm-command-map (kbd "T") #'helm-themes)
+       (global-set-key (kbd "M-y")     'helm-show-kill-ring))
+   #+end_src
+
+   Para más información [[https://github.com/emacs-helm/helm][helm-package]].
