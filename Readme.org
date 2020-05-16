@@ -551,3 +551,25 @@
    #+end_src
 
    Para más información [[https://www.emacswiki.org/emacs/WhichFuncMode][which-function]].
+
+** Autocompile
+
+   Este paquete permite realizar la auticompilación de los archivos el que se
+   descargan en la instalación para que estén automáticamente disponibles para
+   su uso en su última versión.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Autocompile
+     (use-package auto-compile
+       :init
+       (auto-compile-on-load-mode 1)
+       (auto-compile-on-save-mode 1)
+       :config
+       (setq auto-compile-display-buffer nil
+             auto-compile-mode-line-counter t
+             load-prefer-newer t
+             auto-compile-display-buffer nil
+             auto-compile-mode-line-counter t))
+   #+end_src
+
+   Para más información [[https://github.com/emacscollective/auto-compile][auto-compile]].
