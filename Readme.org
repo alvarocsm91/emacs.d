@@ -1385,3 +1385,67 @@
    #+end_src
 
    Para más información link
+
+** TCL
+
+   Descripción
+
+   #+begin_src lisp :tangle init.el
+     ;;;; TCL
+     ;;;;; Show trailing whitespaces
+     (add-hook 'tcl-mode-hook
+           (lambda ()
+             (setq show-trailing-whitespace t)))
+
+     ;;;;; Outshine
+     (add-hook 'tcl-mode-hook
+           (lambda ()
+             (setq-local outline-regexp
+                 "# [*]+")))
+   #+end_src
+
+   Para más información link
+
+*** XDC
+
+   Descripción
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Set *.xdc to open as tcl-mode
+     ;; URL: http://ergoemacs.org/emacs/emacs_auto-activate_a_major-mode.html
+     ;; setup files ending in *.xdc to open in tcl-mode
+     (add-to-list 'auto-mode-alist '("\\.xdc\\'" . tcl-mode))
+   #+end_src
+
+*** UCF
+
+   Descripción
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Set *.ucf to open as tcl-mode
+     ;; URL: http://ergoemacs.org/emacs/emacs_auto-activate_a_major-mode.html
+     ;; setup files ending in *.ucf to open in tcl-mode
+     (add-to-list 'auto-mode-alist '("\\.ucf\\'" . tcl-mode))
+   #+end_src
+
+*** BD
+
+   Descripción
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Set *.bd to open as tcl-mode
+     ;; Open Xilinx block design as TCL file
+     (add-to-list 'auto-mode-alist '("\\.bd\\'" . tcl-mode))
+   #+end_src
+
+*** IP
+
+   Descripción
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Set *.ip to open as tcl-mode
+     ;; Open Xilinx IPcore as TCL file
+     (add-to-list 'auto-mode-alist '("\\.ip\\'" . tcl-mode))
+   #+end_src
+
+   Para más información link
