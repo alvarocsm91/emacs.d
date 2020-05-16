@@ -459,3 +459,28 @@
    #+end_src
 
    Para más información [[https://magit.vc/][magit]] y [[https://magit.vc/][magit-svn]].
+
+** Super Save
+
+   Este módulo permite la configuración del autoguardado de las fuentes
+   modificadas. también se instala super save para que gruarde el buffer
+   automáticamnte cada vez que se cambie de buffer.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Auto backup and save
+     (setq auto-save-default t	;; do auto-saving of every file-visiting buffer.
+           delete-auto-save-files t  ;; delete auto-save file when a buffer is saved or killed.
+           auto-save-timeout 10	;; Number of seconds idle time before auto-save.
+           auto-save-interval 300)	;; Number of input events between auto-saves.
+
+     (use-package super-save
+       :init
+       (super-save-mode 1)
+       :defer 5
+       :config
+       (setq super-save-auto-save-when-idle t ;; Save current buffer automatically when Emacs is idle
+         super-save-remote-files nil)     ;; Save remote files when t, ignore them otherwise
+       )
+   #+end_src
+
+   Para más información [[https://github.com/bbatsov/super-save][super-save]].
