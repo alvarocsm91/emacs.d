@@ -100,3 +100,17 @@
   También se puede utilizar el comando /require/ para las mismas funciones.
 
   Para más información [[https://github.com/jwiegley/use-package][use-package]].
+
+** Hydra
+
+   El paquete de hydra es muy importante en esta configuración ya que premite
+   acortar los comandos para llamar funciones, al utilizar muchos y muy diversos
+   paquete, permite crear combinaciones de comandos.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Hydra
+     (use-package hydra
+       :defer t)
+   #+end_src
+
+   Para más información [[https://github.com/abo-abo/hydra][hydra]].
