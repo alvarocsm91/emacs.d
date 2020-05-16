@@ -114,3 +114,81 @@
    #+end_src
 
    Para más información [[https://github.com/abo-abo/hydra][hydra]].
+
+** Org
+
+   Org es uno de los modos de trabajo más importantes de emacs, ya que permite
+   muchisimas cosas entre ellas trabajar de forma organizada, generando
+   documentos con código para exportar a partir de software libre como emacs
+   dejando los documentos elegantes y comprensibles. Se tuiliza también para la
+   gestión de tareas por llevar a cabo y es muy utilizado gracias a la mezcla de
+   sus funcionalidades con otros paquetes.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Org mode
+     (use-package org
+       :ensure org-plus-contrib
+       :config
+       (setq org-return-follows-link t)
+       :hook (org-mode . (lambda ()
+                           (aggressive-fill-paragraph-mode t)))
+       :bind
+       (("C-x L" . org-store-link)		;; global
+        ("C-x C-l" . org-insert-link-global) ;; global
+        :map org-mode-map
+        ("C-x C-l" . org-insert-link)))
+   #+end_src
+
+   Para la gestión de tareas se han definido los siguientes estados de la tareas
+   en las que las tareas empiezan como ideas para ser definidas /TBD/ pasando a
+   por hacer cuando se ha generado la planificación de la misma con /TODO/. Una
+   vez se han iniciado se manienen en modo /ACTIVE/ o /BLOCKED/ en función de si
+   estamos trabajando o no en este mismo momento. Por último, la tarea se define
+   como completa con los atributos de /DONE/ y /ARCHIVED/ para cuando las tareas
+   han sido terminadas y cerradas y el atributo de DELETED por si al final se ha
+   decidido no hacer, estos tres marcan la tarea como completa.
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Org tarsk state
+     ;;Define pocess states
+     (setq org-todo-keywords
+     '((sequence "TBD" "TODO" "ACTIVE" "BLOCKED" "REVIEW" "|" "DONE" "ARCHIVED" "DELETED")))
+     ;; Define process colours
+     (setq org-todo-keyword-faces
+           '(("TBD" .(:foreground "white" :weight bold-italic))
+           ("TODO" .(:foreground "grey" :weight bold-italic))
+           ("ACTIVE" .(:foreground "ligth-blue" :weight bold-italic))
+           ("BLOCKED" .(:foreground "purple" :weight bold-italic))
+           ("REVIEW" .(:foreground "pink" :weight bold-italic))
+           ("DONE" .(:foreground "yellow" :weight bold-italic))
+           ("ARCHIVED" .(:foreground "green" :weight bold-italic))
+           ("DELETED" .(:foreground "black" :weight bold-italic))))
+   #+end_src
+
+   Para la exportación de documentación en latex y el uso de los colores de la
+   tablera de colores de los modos de programación soportados en org se utiliza
+   la herramienta /pygmentize/ que hay que instalar previamente en nuestro
+   terminal.
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Org pygmentize
+     (require 'org)
+     (require 'ox-latex)
+     (add-to-list 'org-latex-packages-alist '("" "minted"))
+     (setq org-latex-listings 'minted)
+
+     (setq org-latex-pdf-process
+           '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+     (setq org-src-fontify-natively t)
+
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((R . t)
+        (latex . t)
+        ()))
+   #+end_src
+
+   Para más información [[https://orgmode.org/][org-mode]].
