@@ -1057,6 +1057,7 @@
 
    #+begin_src lisp :tangle init.el
      ;;; Programming modes
+     (use-package outshine)
      (add-hook 'prog-mode-hook
                (lambda ()
                  (outshine-mode t)
