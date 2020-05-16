@@ -989,3 +989,22 @@
    #+end_src
 
    Para más información [[https://es.wikipedia.org/wiki/UTF-8][utf-8]].
+
+** Theme
+
+   Aquí se realiza la descarga del paquete de gruvbox que permite el uso de sus
+   6 temas distintos, a mi me gusta el /dark-hard/ para por la noche y el
+   /ligth-soft/ para el día. Para poder trabajar con los dos modos utilizo el
+   paquete /adaptative-theme/ para el uso combinado de temas claros y oscuros en
+   función del cambio horario de mi localización.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Theme
+     ;;;;; Adaptative theme installation
+     (when (file-exists-p (format "%s/.emacs.d/adaptative-theme/adaptativeTheme.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/adaptative-theme/adaptativeTheme.el" MyHomeDir)))
+
+     (adaptative-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
+   #+end_src
+
+   Para más información [[https://github.com/greduan/emacs-theme-gruvbox][gruvbox-theme]] and [[https://github.com/alvarocsm91/adaptative-theme][adaptative-theme]].
