@@ -646,7 +646,7 @@
    utilizar, en mi caso utilizaré el español y el inglés. Para ello se define el
    diccionario y luego se puede seleccionar el buffer y aplicar /ispell-region/.
 
-   Yo lo uso con /M-x ispell-contiue/ y saltando a la siguiente palabra pulsando
+   Yo lo uso con /M-x ispell-continue/ y saltando a la siguiente palabra pulsando
    el /SPC/.
 
    #+begin_src lisp :tangle init.el
@@ -753,3 +753,16 @@
    #+end_src
 
    Para más información [[https://github.com/nlamirault/ripgrep.el][ripgrep-package]].
+
+** Helm-rg (Rg)
+
+   Permite la gestión para búsquedas masivas de datos.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Ag
+     (use-package helm-rg
+       :ensure t
+       :pin melpa-stable)
+   #+end_src
+
+   Para más información [[https://github.com/cosmicexplorer/helm-rg][helm-rg]].
