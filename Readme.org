@@ -573,3 +573,18 @@
    #+end_src
 
    Para más información [[https://github.com/emacscollective/auto-compile][auto-compile]].
+
+** Multiple cursors
+
+   Permite la generación de multiples cursores para editar texto en columna para
+   aumentar la velocidad en el desarrollo. Para utilizarlo es necesario marcar
+   las distintas líneas sobre las que se quiere actuar y luego proceder con /C-c
+   m c/
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Multiple cursors
+     (use-package multiple-cursors)
+     (global-set-key (kbd "C-c m c") 'mc/edit-lines)
+   #+end_src
+
+   Para más información [[https://github.com/magnars/multiple-cursors.el][multiple-cursors]].
