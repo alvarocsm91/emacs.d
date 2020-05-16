@@ -1042,3 +1042,20 @@
      (when (file-exists-p (format "%s/.emacs.d/general_conf.el" MyHomeDir))
        (load-file (format "%s/.emacs.d/general_conf.el" MyHomeDir)))
    #+end_src
+
+* Modos de programación
+
+  Los modos de programación permiten la carga de ciertas funcionalidades
+  específicas de cada uno de los lenguajes de programación como son los colores
+  a utilizar o los snippets, también permite adaptar el paquete flycheck con los
+  errores detectados. Me gusta dividirlos y sobre todo agrupar los que son de
+  una misma temática, una de las funcionalidades que más utilizo es el outshine,
+  por lo que lo configuro para cada uno de los modos de trabajo.
+
+   #+begin_src lisp :tangle init.el
+     ;;; Programming modes
+     (add-hook 'prog-mode-hook
+               (lambda ()
+                 (outshine-mode t)
+                 (org-link-minor-mode t)))
+   #+end_src
