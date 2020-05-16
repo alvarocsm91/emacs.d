@@ -247,3 +247,33 @@
    #+end_src
 
    Para más información [[https://github.com/pinard/poporg][poporg]].
+
+** Org-Trello
+
+   Se trata de un paquete que permite la extensión del modo org a la herramienta
+   trello disponible de forma gratuita en internet y nos permite realozar tareas
+   de gestión de proyectos o tareas.
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Org Trello
+     ;;(require 'org-trello)
+     ;;(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     ;;(package-initialize)
+
+     ;;;;;; Set credentials
+     ;; First of all you should connect with trello with the browser using next command:
+     ;; org-trello-install-key-and-token
+     ;; Now you can use trello woth emacs
+
+     ;;;;;; Add Trello to major mode
+     ;;(add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
+
+     ;;;;;; Auto org-trello files in emacs
+     ;;(add-hook 'org-mode-hook
+     ;;(lambda ()
+     ;;(let ((filename (buffer-file-name (current-buffer))))
+     ;;(when (and filename (string= "trello" (file-name-extension filename)))
+     ;;(org-trello-mode)))))
+   #+end_src
+
+   Para más información [[https://org-trello.github.io/][org-trello]].
