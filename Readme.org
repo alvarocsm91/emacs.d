@@ -363,3 +363,26 @@
    #+end_src
 
    Para más información [[https://github.com/Malabarba/aggressive-indent-mode][aggresive-indent]].
+
+** Whitespace
+
+   Este paquete permite eliminar los espacios en blanco no necesarios en
+   cualquier código, esto permite una gran ayuda en la comparación y mantener
+   los archivos sin exceso de carga.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Whitespace
+     (use-package whitespace
+       :config
+       (add-to-list 'whitespace-style 'lines-tail)
+       (setq-default show-trailing-whitespace nil)
+       (setq whitespace-line-column 80))
+
+     (use-package whitespace-cleanup-mode
+       :init
+       (global-whitespace-cleanup-mode 1)
+       :config
+       (setq whitespace-cleanup-mode-only-if-initially-clean nil))
+   #+end_src
+
+   Para más información [[https://github.com/emacs-mirror/emacs/blob/master/lisp/whitespace.el][whitespace]].
