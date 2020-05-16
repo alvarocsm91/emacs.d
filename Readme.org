@@ -77,3 +77,26 @@
     (package-initialize)
     (package-refresh-contents)
   #+end_src
+
+* Instalación de paquetes
+
+  Una de las grandes ventajas que tiene emacs es que se pueden añadir fácilmente
+  distintos paquetes y con ello funcionalidades que permiten hacer tu vida más
+  facil a la hora de conseguir tus metas.
+
+  Para la instalación de paquetes es recomendable utilizar la función
+  /use-package/ que permite realizar una auto carga de la última actualización
+  de los distintos paquetes que se utilicen en el sistema, descargandolos y
+  compilandolos para poder ser utilizados.
+
+  #+begin_src lisp :tangle init.el
+    ;;; Package usage
+    ;;;; Use Package
+    (package-install 'use-package t)
+    (setq use-package-always-defer t
+          use-package-always-ensure t)
+  #+end_src
+
+  También se puede utilizar el comando /require/ para las mismas funciones.
+
+  Para más información [[https://github.com/jwiegley/use-package][use-package]].
