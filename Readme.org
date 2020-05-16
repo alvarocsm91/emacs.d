@@ -942,3 +942,33 @@
    #+end_src
 
    Para más información link
+
+** Global modes
+
+   Este apartado permite la configuración de las funcionalidades básicas por
+   defecto que tendrá emacs al abrirse.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Global modes
+     (delete-selection-mode)                           ; Replace region when inserting text
+     (setq line-number-mode t)                         ; Enable line numbers in the mode-line
+     (setq column-number-mode t)                       ; Enable column numbers in the mode-line
+     (size-indication-mode 1)                          ; Enable size status in the mode-line
+     (display-time-mode)                               ; Enable time in the mode-line
+     (when (window-system)
+       (fringe-mode 80))
+     (fset 'yes-or-no-p 'y-or-n-p)                     ; Replace yes/no prompts with y/n
+     (global-hl-line-mode)                             ; Hightlight current line
+     (show-paren-mode t)
+     (setq show-paren-style 'expression)
+     (global-subword-mode)                             ; Iterate through CamelCase words
+     (menu-bar-mode 0)                                 ; Disable the menu bar
+     (mouse-avoidance-mode 'banish)                    ; Avoid collision of mouse with point
+     (put 'downcase-region 'disabled nil)              ; Enable downcase-region
+     (put 'upcase-region 'disabled nil)                ; Enable upcase-region
+     (put 'downcase-region 'disabled nil)              ; Enable downcase-region
+     (put 'upcase-region 'disabled nil)                ; Enable upcase-region
+     (add-hook 'focus-out-hook #'garbage-collect)
+     (add-hook 'before-save-hook 'delete-trailing-whitespace)
+     (fset 'yes-or-no-p 'y-or-n-p)
+   #+end_src
