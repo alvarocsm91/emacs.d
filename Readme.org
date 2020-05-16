@@ -588,3 +588,27 @@
    #+end_src
 
    Para más información [[https://github.com/magnars/multiple-cursors.el][multiple-cursors]].
+
+** TODO Yasnippet
+
+   Se trata de un paquete de gestión de snippets o fragmentos de código a los
+   que se invoca a partir de un nombre en clave y su ejecución con el tambulador.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Yasnippet
+     (use-package yasnippet)
+     ;; Use as global mode
+     (yas-global-mode 1)
+     ;;;;; Add yasnippet as minor mode in prog-modes
+     ;;(yas-reload-all)
+     ;;(add-hook 'prog-mode-hook #'yas-minor-mode)
+     ;;;;; Configure yasnippet
+     (setq yas-snippet-dirs
+           '("~/.emacs.d/snippets/vhdl-mode/vhdl"
+     ;;	"~/.emacs.d/snippets/C"
+        ))
+     ;;;;; Create snippets
+     ;; look in noxt folder .emacs/elpa/yasnippet-snippets/snippets/vhdl-mode/
+   #+end_src
+
+   Para más información [[https://github.com/joaotavora/yasnippet][yasnippet]].
