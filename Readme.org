@@ -810,3 +810,20 @@
    #+end_src
 
    Para más información [[https://github.com/ryuslash/mode-icons][mode-icons]].
+
+** Hightlight-symbol
+
+   Se trata de un paquete que permite el subrayado de una palabra o código
+   manteniendolo subrayado mientras navegas por el fichero para detectar donde
+   se repite.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Hightlight-symbol
+     (use-package highlight-symbol)
+     (global-set-key [(control f3)] 'highlight-symbol)
+     (global-set-key [f3] 'highlight-symbol-next)
+     (global-set-key [(shift f3)] 'highlight-symbol-prev)
+     (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
+   #+end_src
+
+   Para más información [[https://github.com/nschum/highlight-symbol.el][highlight-symbol]].
