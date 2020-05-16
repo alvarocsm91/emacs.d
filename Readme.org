@@ -782,3 +782,18 @@
    #+end_src
 
    Para más información [[https://wakatime.com/emacs][wakatime-package]] y [[https://github.com/wakatime/wakatime][wakatime-tool]].
+
+** Undo-tree
+
+   Este paquete permite navegar a traves de los cambios realizados en el archivo
+   facilmente, evitando tener que utilizar los metodos de deshacer cambios
+   complejos e inútiles del propio editor.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Undo tree
+     (use-package undo-tree)
+     ;; Active as global mode
+     (global-undo-tree-mode 1)
+   #+end_src
+
+   Para más información link
