@@ -344,3 +344,22 @@
    #+end_src
 
    Para más información [[https://www.flycheck.org/en/latest/][fly-check]].
+
+** Aggresive indent
+
+   Aggresive-indent es un paquete que permite mantener el estilo en función del
+   modo de programación utilizado de forma que quede correctamente indentado, a
+   veces es bueno quitarlo mientras se desarrolla ya que hay veces que
+   desindenta el código hasta que esté terminada la línea. También permite la
+   detección de errores en el código.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Aggresive indent
+     (use-package aggressive-indent
+       :init (global-aggressive-indent-mode 1))
+
+     (use-package aggressive-fill-paragraph
+       :ensure t)
+   #+end_src
+
+   Para más información [[https://github.com/Malabarba/aggressive-indent-mode][aggresive-indent]].
