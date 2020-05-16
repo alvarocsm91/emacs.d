@@ -741,3 +741,15 @@
    #+end_src
 
    Para más información [[https://github.com/emacsorphanage/helm-ag][helm-ag]].
+
+** Ripgrep
+
+   Usa projectile para realizar búsquedas dentro de un proyecto.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Ripgrep
+     (use-package ripgrep
+       :ensure t)
+   #+end_src
+
+   Para más información [[https://github.com/nlamirault/ripgrep.el][ripgrep-package]].
