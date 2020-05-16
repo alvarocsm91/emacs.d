@@ -1449,3 +1449,27 @@
    #+end_src
 
    Para más información link
+
+** R - Matlab
+
+   Este apartado, como se puede ver está por desarrollar, se pretende crear un
+   espacio para la programación en R eficiente.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Matlab
+     ;; install matlab mode
+     ;;(require 'matlab-mode)
+
+     ;; include libraries
+     ;; https://blogs.mathworks.com/community/2009/09/14/matlab-emacs-integration-is-back/
+
+     ;; https://www.emacswiki.org/emacs/MatlabMode
+     ;;(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+     ;;(add-to-list
+     ;; 'auto-mode-alist
+     ;; '("\\.m$" . matlab-mode))
+     ;;(setq matlab-indent-function t)
+     ;;(setq matlab-shell-command "matlab")
+   #+end_src
+
+   Para más información link
