@@ -766,3 +766,19 @@
    #+end_src
 
    Para más información [[https://github.com/cosmicexplorer/helm-rg][helm-rg]].
+
+** TODO Wakatime
+
+   Wakatime es un paquete que permite evaluar la eficiencia de tu uso de emacs,
+   evaluando el tipo de scripts que habitualmente utilizas y el tiempo consumido
+   en la modificación de los mismos. Utiliza un paquete externo que permite la
+   visualización de los datos obtenidos a través de web. Lo mantego comentado
+   hasta poder solucionar los problemas encontrados.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Wakatime
+     ;;(use-package wakatime-mode)
+     ;;(global-wakatime-mode 1)
+   #+end_src
+
+   Para más información [[https://wakatime.com/emacs][wakatime-package]] y [[https://github.com/wakatime/wakatime][wakatime-tool]].
