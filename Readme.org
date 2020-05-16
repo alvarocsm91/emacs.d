@@ -386,3 +386,27 @@
    #+end_src
 
    Para más información [[https://github.com/emacs-mirror/emacs/blob/master/lisp/whitespace.el][whitespace]].
+
+** Crux
+
+   Este paquete incluye una colección de ridiculas cuncionalidades y
+   extensiones, esto permite por ejemplo abrir archivos sin importar el nivel de
+   privilegios con el que se accede y si es necesario lo reabre con uno superior.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Crux
+     (use-package crux
+       :defer t
+       :config
+       (progn
+         (crux-reopen-as-root-mode 1))
+       :bind
+       (:map global-map
+         ("C-a" . nil)
+         ([remap kill-whole-line] . crux-kill-whole-line)
+         ([remap move-beginning-of-line] . crux-move-beginning-of-line)
+         ("C-a"  . crux-move-beginning-of-line)))
+
+   #+end_src
+
+   Para más información [[https://github.com/bbatsov/crux][crux]].
