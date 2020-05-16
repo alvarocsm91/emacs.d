@@ -1008,3 +1008,24 @@
    #+end_src
 
    Para más información [[https://github.com/greduan/emacs-theme-gruvbox][gruvbox-theme]] and [[https://github.com/alvarocsm91/adaptative-theme][adaptative-theme]].
+
+** Appereance
+
+   Para el uso de emacs me gusta quitar la barra superior blanca iniciando con
+   la pantalla maximizada, manteniendo los números de línea y evitando las
+   barras de los laterales para moverme por el archivo ya que para eso tengo las
+   teclas del teclado.
+
+   #+begin_src lisp :tangle init.el
+     ;; Start maximised
+     (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
+
+     ;; Remove all that’s not necessary
+     (when window-system
+       (menu-bar-mode 0)
+       (global-display-line-numbers-mode t)
+       ;; (blink-cursor-mode 0)                        ; Disable the cursor blinking
+       (scroll-bar-mode 0)                             ; Disable the scroll bar
+       (tool-bar-mode 0)                               ; Disable the tool bar
+       (tooltip-mode 0))                               ; Disable the tooltips
+   #+end_src
