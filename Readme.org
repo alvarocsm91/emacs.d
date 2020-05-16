@@ -218,3 +218,32 @@
    #+end_src
 
    Para más información [[https://github.com/seanohalpin/org-link-minor-mode][org-link-minor-mode]].
+
+** Poporg
+
+   Poporg es un paquete que permite hacer una correcta presentación de
+   fragmentos de distintos modos dobre un mismo archivo, pudiendo mantener los
+   modos generales de documentación integrando fragmentos de código en ellos
+   para poder extraerlos posteriormente. Sirve principalmente para comentar de
+   forma cómoda un código o añadir comentarios automaticamente.
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Poporg
+     (use-package poporg
+       :ensure t
+       :bind
+       ;; call it
+       (:map global-map
+         (("C-c SPC" . poporg-dwim))
+         ;; from within the org mode, poporg-mode-map is a minor mode
+         :map poporg-mode-map
+         ("C-c C-c" . poporg-update)            ;; update original
+         ("C-c SPC" . poporg-edit-exit)         ;; exit, keeping changes
+         ("C-x C-s" . poporg-update-and-save))  ;; update original and save buffer
+       :hook (poporg-mode . (lambda ()
+                  (outline-show-all)
+                  (aggressive-fill-paragraph-mode t)
+                  (goto-char (point-min)))))
+   #+end_src
+
+   Para más información [[https://github.com/pinard/poporg][poporg]].
