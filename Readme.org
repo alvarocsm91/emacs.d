@@ -1363,3 +1363,25 @@
      ;; Jupyter notebook file
      (add-to-list 'auto-mode-alist '("\\.ipynb\\'" . python-mode))
    #+end_src
+
+** C/C++
+
+   Se incluye el modo de programación para C/C++, se trata de uno de los modos
+   por defecto por lo que no se requiere una configuración muy compleja.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; C/C++
+     ;;;;; Show trailing whitespaces
+     (add-hook 'c-mode-hook
+           (lambda ()
+             (setq show-trailing-whitespace t)))
+
+     ;;;;; Outshine
+     (add-hook 'c-mode-hook
+           (lambda ()
+             (setq-local outline-regexp
+                 "// [*]+")))
+     ;;                        "^//\\s-\\([*]\\{1,8\\}\\)\\s-\\(.*\\)$")))
+   #+end_src
+
+   Para más información link
