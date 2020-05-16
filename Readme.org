@@ -1029,3 +1029,16 @@
        (tool-bar-mode 0)                               ; Disable the tool bar
        (tooltip-mode 0))                               ; Disable the tooltips
    #+end_src
+
+** Load Files
+
+   Para poder cargar código emacs en distintos archivos se pueden cargar tal y
+   como se muestra a continuación, la idea es dividir las funcionalidades y
+   paquetes explicados anteriormente en distintos archivos *.el diferenciando
+   usos y temáticas para hacer un poco de limpieza sobre este archivo.
+
+   #+begin_src lisp :tangle init.el
+     ;;; Load files
+     (when (file-exists-p (format "%s/.emacs.d/general_conf.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/general_conf.el" MyHomeDir)))
+   #+end_src
