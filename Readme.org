@@ -612,3 +612,28 @@
    #+end_src
 
    Para más información [[https://github.com/joaotavora/yasnippet][yasnippet]].
+
+** Annotation mode
+
+   El modo anotación nos permite tomar notas sobre un archivo sin modificar el
+   original, creando otro en el que se almacene el original más las notas. Muy
+   útil al coger el proyecto de otra persona y querer mantener el proyecto
+   comprendiendolo antes de empezar a trabajar con el.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Annotation mode
+     (defun csb/org-annotate-file ()
+       (interactive)
+       (let ((org-annotate-file-add-search t)
+             (org-annotate-file-storage-file
+              (if (buffer-file-name) ;; if not nil
+                  ;; for the rest of buffers, create a hidden folder containing its buffer-file-name
+                  (concat (file-name-directory (buffer-file-name)) "." (file-name-nondirectory (buffer-file-name))
+                          ".annotations")
+                "~/.org-annotate-file.org")))
+         (org-annotate-file)))
+
+     (global-set-key (kbd "C-c C-SPC") #'csb/org-annotate-file)
+   #+end_src
+
+   Para más información [[https://www.emacswiki.org/emacs/OrgAnnotateFile][annotation-mode]].
