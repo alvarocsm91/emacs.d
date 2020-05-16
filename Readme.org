@@ -1334,3 +1334,32 @@
    #+end_src
 
    Para más información link
+
+*** Different python files
+
+   Se incluyen como archivos de python los distintos archivos generados
+   relacionados con este modo de programación.
+
+   #+begin_src lisp :tangle init.el
+     ;;;;; Set *.pyz to open as python-mode
+     ;; Python script archive
+     (add-to-list 'auto-mode-alist '("\\.pyz\\'" . python-mode))
+     ;;;;; Set *.pywz to open as python-mode
+     ;; Python script archive form MS-Windos
+     (add-to-list 'auto-mode-alist '("\\.pywz\\'" . python-mode))
+     ;;;;; Set *.rpy to open as python-mode
+     ;; RPython script or python script contain app or framework specific features
+     (add-to-list 'auto-mode-alist '("\\.rpy\\'" . python-mode))
+     ;;;;; Set *.pyde to open as python-mode
+     ;; Python script used by processing
+     (add-to-list 'auto-mode-alist '("\\.pyde\\'" . python-mode))
+     ;;;;; Set *.pyp to open as python-mode
+     ;; Py4D Python Plugin
+     (add-to-list 'auto-mode-alist '("\\.pyp\\'" . python-mode))
+     ;;;;; Set *.pyt to open as python-mode
+     ;; Python declaration file
+     (add-to-list 'auto-mode-alist '("\\.pyt\\'" . python-mode))
+     ;;;;; Set *.ipynb to open as python-mode
+     ;; Jupyter notebook file
+     (add-to-list 'auto-mode-alist '("\\.ipynb\\'" . python-mode))
+   #+end_src
