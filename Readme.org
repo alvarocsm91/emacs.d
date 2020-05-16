@@ -527,3 +527,27 @@
    #+end_src
 
    Para más información [[https://github.com/justbur/emacs-which-key][which-key]].
+
+** Which function
+
+   Permite hacer lo mismo que el paquete anterior pero sobre la escritura de
+   funciones en ciertos modos mayores.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Which function
+     (use-package which-func
+       :init
+       (which-function-mode 1)
+       :config
+       (setq which-func-unknown " "
+         which-func-format
+         (list " " (car (cdr which-func-format)) "")
+         mode-line-misc-info
+         ;; We remove Which Function Mode from the mode line, because it's mostly
+         ;; invisible here anyway.
+         (assq-delete-all 'which-func-mode mode-line-misc-info))
+       (setq-default header-line-format '((which-function-mode (""
+             which-func-format " ")))))
+   #+end_src
+
+   Para más información [[https://www.emacswiki.org/emacs/WhichFuncMode][which-function]].
