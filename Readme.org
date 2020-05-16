@@ -1226,3 +1226,111 @@
    #+end_src
 
    Para más información link
+
+** Python
+
+   Falta por explicar la configuración del modo de trabajo.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Python
+     ;;;;; Instal package
+     (use-package elpy)
+
+     ;;;;; Emacs IPython Notebook
+     (use-package ein)
+
+     ;;;;; Enable package
+     (elpy-enable)
+
+     ;;;;; Use IPython for REPL
+     (setq python-shell-interpreter "jupyter"
+           python-shell-interpreter-args "console --simple-prompt"
+           python-shell-prompt-detect-failure-warning nil)
+     (add-to-list 'python-shell-completion-native-disabled-interpreters
+              "jupyter")
+
+     ;;;;; Enable flycheck mode
+     (when (require 'flycheck nil t)
+       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+       (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+     ;;;;; Show trailing whitespaces
+     (add-hook 'python-mode-hook
+           (lambda ()
+             (setq show-trailing-whitespace t)))
+     ;;;;; Outshine
+     (add-hook 'python-mode-hook
+           (lambda ()
+             (setq-local outline-regexp
+                 "# [*]+")))
+
+     ;;;; Python
+
+     ;; Based on [[https://vxlabs.com/2018/11/19/configuring-emacs-lsp-mode-and-microsofts-visual-studio-code-python-language-server/][this]] article.
+
+     ;; Only under linux
+     ;;(when (eq (window-system) 'x)
+
+     ;;(add-hook 'python-mode-hook
+     ;;(lambda ()
+     ;; flychek checker
+     ;;(flycheck-select-checker 'python-flake8)
+     ;;(lsp))))
+
+     ;;  ;; Microsoft lsp implementation
+     ;;  (use-package ms-python
+     ;;    :config
+     ;;    (setq ms-python-server-install-dir
+     ;;          ;; set path to install
+     ;;          (expand-file-name
+     ;;           "~/Software/MS-LS/build/python-language-server/output/bin/Release/")
+     ;;          ;; set path to dotnet
+     ;;          ms-python-dotnet-install-dir "/usr/bin"))
+     ;;
+     ;;(use-package lsp-mode
+     ;;    :config
+
+     ;;    ;; change nil to 't to enable logging of packets between emacs and the LS
+     ;;    ;; this was invaluable for debugging communication with the MS Python Language Server
+     ;;    ;; and comparing this with what vs.code is doing
+     ;;    (setq lsp-print-io nil)
+     ;;
+     ;;    ;; lsp-ui gives us the blue documentation boxes and the sidebar info
+     ;;    (use-package lsp-ui
+     ;;      :config
+     ;;      ;; flycheck
+     ;;      (require 'lsp-ui-flycheck)
+     ;;      ;;
+     ;;      (setq lsp-ui-sideline-ignore-duplicate t
+     ;;            lsp-ui-sideline-delay 1
+     ;;            lsp-ui-doc-use-childframe nil)
+     ;;      (define-key lsp-ui-mode-map [remap xref-find-definitions]
+     ;;        #'lsp-ui-peek-find-definitions)
+     ;;      (define-key lsp-ui-mode-map [remap xref-find-references]
+     ;;        #'lsp-ui-peek-find-references)
+     ;;      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+     ;;      (add-hook 'lsp-after-open-hook #'(lambda()(lsp-ui-flycheck-enable t)))
+     ;;      (add-hook 'lsp-after-open-hook #'(lambda()(lsp-ui-sideline-enable t)))
+     ;;      (add-hook 'lsp-after-open-hook #'(lambda()(lsp-ui-imenu-enable t)))
+     ;;      (add-hook 'lsp-after-open-hook #'(lambda()(lsp-ui-peek-enable t)))
+     ;;      (add-hook 'lsp-after-open-hook #'(lambda()(lsp-ui-doc-enable t))))
+     ;;
+     ;;    ;; install LSP company backend for LSP-driven completion
+     ;;    (use-package company-lsp
+     ;;      :config
+     ;;      ;; avoid, as this changes it globally
+     ;;      ;; do it in the major mode instead
+     ;;      ;; (push 'company-lsp company-backends)
+     ;;      ;; better set it locally
+     ;;      (add-hook 'lsp-after-open-hook
+     ;;                #'(lambda()(add-to-list (make-local-variable 'company-backends)
+     ;;                                        'company-lsp)))
+     ;;      (setq company-lsp-async t
+     ;;            company-lsp-cache-candidates t
+     ;;            company-lsp-enable-recompletion t
+     ;;            company-lsp-enable-snippet t)))
+     ;;
+     ;;  ) ;; (eq (window-system) 'x)
+   #+end_src
+
+   Para más información link
