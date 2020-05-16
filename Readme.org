@@ -729,3 +729,15 @@
    #+end_src
 
    Para más información [[https://github.com/bbatsov/projectile][projectile]] y [[https://github.com/bbatsov/helm-projectile][helm-projectile]].
+
+** Helm-ag (Grep)
+
+   Permite a emacs utilizar herramientas específicas de búsqueda de linux.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Grep
+     (use-package helm-ag
+       :ensure t)
+   #+end_src
+
+   Para más información [[https://github.com/emacsorphanage/helm-ag][helm-ag]].
