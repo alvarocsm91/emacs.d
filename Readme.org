@@ -410,3 +410,25 @@
    #+end_src
 
    Para más información [[https://github.com/bbatsov/crux][crux]].
+
+** Smart scan
+
+   Smat scan permite buscar elementos, el uso que se le da en esta configuración
+   es para desplazarnos entre palabras de un mismo buffer. Se utiliza a partir
+   del Atl-p o Alt-n sobre una palabra para ir a la identica posterior o
+   anterior.
+
+   #+begin_src lisp :tangle init.el
+     ;;;;  Smart scan
+     (use-package smartscan
+       :init
+       (global-smartscan-mode 1)
+       :bind
+       (:map smartscan-map
+         ("M-’" . 'smartscan-symbol-replace))
+       :config
+       ;; Variables
+       (setq smartscan-symbol-selector "word"))
+   #+end_src
+
+   Para más información [[https://github.com/mickeynp/smart-scan][smart-scan]].
