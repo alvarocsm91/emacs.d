@@ -840,3 +840,16 @@
    #+end_src
 
    Para más información [[https://github.com/Malabarba/emacs-google-this][google-this]].
+
+** Google translator
+
+   Paquete que permite poder realizar traducciones a partir del uso de google
+   translate.
+
+   #+begin_src lisp :tangle init.el
+     (use-package google-translate)
+     (require 'google-translate-smooth-ui)
+     (global-set-key "\C-ct" 'google-translate-smooth-translate)
+   #+end_src
+
+   Para más información [[https://github.com/atykhonov/google-translate][google-translate]].
