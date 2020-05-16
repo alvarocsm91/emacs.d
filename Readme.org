@@ -484,3 +484,46 @@
    #+end_src
 
    Para más información [[https://github.com/bbatsov/super-save][super-save]].
+
+** Which key
+
+   Se trata de un paquete que permite generar una ayuda de autocompletar los
+   distintos comandos mientras se escriben, se utiliza por ejemplo en paquetes
+   como projectile cuando tenemos una gran variedad de comandos para mostrar que
+   hace cada combinación.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Which key
+     (use-package which-key
+       :init (which-key-mode 1)
+       :pin melpa-stable
+       :ensure t
+       :config
+       ;; Set the time delay (in seconds) for the which-key popup to appear.
+       (setq which-key-idle-delay 0.5)
+       ;; A list of regexp strings to use to filter key sequences.
+       (setq which-key-allow-regexps '("C-c p" "C-c p s" "C-x c"))
+       ;; Set the maximum length (in characters) for key descriptions (commands or
+       ;; prefixes). Descriptions that are longer are truncated and have ".." added
+       (setq which-key-max-description-length nil)
+       ;; Set the separator used between keys and descriptions. Change this setting to
+       ;; an ASCII character if your font does not show the default arrow. The second
+       ;; setting here allows for extra padding for Unicode characters. which-key uses
+       ;; characters as a means of width measurement, so wide Unicode characters can
+       ;; throw off the calculation.
+       (setq which-key-separator " → " )
+       (setq which-key-unicode-correction 3)
+       (setq which-key-max-display-columns 3)
+       ;; Set the special keys. These are automatically truncated to one character and
+       ;; have which-key-special-key-face applied. Set this variable to nil to disable
+       ;; the feature
+       (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
+       ;; Show the key prefix on the left or top (nil means hide the prefix). The
+       ;; prefix consists of the keys you have typed so far. which-key also shows the
+       ;; page information along with the prefix.
+       (setq which-key-show-prefix 'left)
+       ;; Set to t to show the count of keys shown vs. total keys in the mode line.
+       (setq which-key-show-remaining-keys nil))
+   #+end_src
+
+   Para más información [[https://github.com/justbur/emacs-which-key][which-key]].
