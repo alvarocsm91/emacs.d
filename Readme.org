@@ -681,3 +681,51 @@
    #+end_src
 
    Para más información [[https://github.com/emacs-helm/helm][helm-package]].
+
+** Project management
+
+   Para la gestión de proyectos, sobre todo proyectos grandes en los que podemos
+   encontrar una gran variedad de fuentes y carpetas es recomendable utilizar
+   /projectile/ que permite el uso de muchas funcionalidades que resultan
+   básicas una vez te has acostumbrado a ellas. Se utiliza en combinación con
+   /helm/ para busquedas específicas dentro del proyecto.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Projectile
+     (use-package projectile
+       :init (projectile-mode 1)
+       :ensure t
+       :pin melpa-stable
+       ;; Keys
+       :bind
+       (:map projectile-mode-map
+         ("C-c p" . projectile-command-map)
+         ("C-c p s a" . projectile-ag)
+         ("C-c p s s" . nil))
+       :config
+
+       ;; Variables
+       (setq projectile-completion-system 'helm
+         projectile-indexing-method 'native
+         projectile-enable-caching t
+         projectile-remember-window-config t
+         projectile-switch-project-action 'projectile-dired)
+
+       (add-to-list 'projectile-globally-ignored-directories ".backups")
+       (add-to-list 'projectile-globally-ignored-directories ".stversions"))
+
+     ;; Helm + projectile
+     (use-package helm-projectile
+       :init (helm-projectile-on)
+       :ensure t
+       :pin melpa-stable
+       :config
+       (setq
+        helm-projectile-fuzzy-match t
+        helm-projectile-sources-list '(helm-source-projectile-recentf-list
+                       helm-source-projectile-buffers-list
+                       helm-source-projectile-files-list
+                       helm-source-projectile-projects)))
+   #+end_src
+
+   Para más información [[https://github.com/bbatsov/projectile][projectile]] y [[https://github.com/bbatsov/helm-projectile][helm-projectile]].
