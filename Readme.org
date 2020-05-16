@@ -432,3 +432,30 @@
    #+end_src
 
    Para más información [[https://github.com/mickeynp/smart-scan][smart-scan]].
+
+** Magit
+
+   Magit es uno de los paquetes más importantes de esta configuración, nos
+   permite poder utilizar git y git-snv desde el mismo emacs. Se accede a el a
+   partir C-x g en una carpeta con un proyecto git para trabajar con ello y en
+   una vacía para iniciarlo. Básico para el control de versiones de cualquier
+   proyecto.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Magit
+     (use-package magit-svn
+       :ensure t)
+
+     (use-package magit
+       :config
+       (add-hook 'magit-mode-hook 'magit-svn-mode)
+       (setq magit-diff-paint-whitespace nil
+         magit-diff-highlight-trailing nil
+         magit-refresh-verbose t
+         magit-refresh-status-buffer t
+         magit-display-buffer-function
+         #'magit-display-buffer-fullframe-status-v1
+         magit-diff-highlight-indentation nil))
+   #+end_src
+
+   Para más información [[https://magit.vc/][magit]] y [[https://magit.vc/][magit-svn]].
