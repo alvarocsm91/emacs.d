@@ -315,3 +315,32 @@
    #+end_src
 
    Para más información [[http://company-mode.github.io/][company-mode]].
+
+** Fly check
+
+   Fly check es un paquete que permite la detección de errores en cada uno de
+   los lenguajes de programación, subrayandolos y permitiendo sobre todo
+   detectar errores de sintaxis, es muy útil cuando se programan en lenguajes
+   interpretados.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Flycheck
+     (use-package flycheck-pos-tip
+       :defer t)
+     (use-package helm-flycheck
+       :defer t)
+     (use-package flycheck-color-mode-line
+       :defer t)
+     (use-package flycheck
+       :init
+       (global-flycheck-mode t)
+       (flycheck-pos-tip-mode t)
+       :bind
+       (:map flycheck-command-map
+         ("h" . helm-flycheck))
+       :config
+       (setq flycheck-completion-system 'helm-comp-read )
+       (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+   #+end_src
+
+   Para más información [[https://www.flycheck.org/en/latest/][fly-check]].
