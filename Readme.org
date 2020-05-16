@@ -637,3 +637,23 @@
    #+end_src
 
    Para más información [[https://www.emacswiki.org/emacs/OrgAnnotateFile][annotation-mode]].
+
+** Ispell-mode
+
+   Permite poder utilizar un corrector de texto en distintos lenguajes al
+   utilizar el modo texto. revisar con ispell y aspell. Para poder utilizar el
+   corrector es importante instalar previamente los diccionarios de idiomas a
+   utilizar, en mi caso utilizaré el español y el inglés. Para ello se define el
+   diccionario y luego se puede seleccionar el buffer y aplicar /ispell-region/.
+
+   Yo lo uso con /M-x ispell-contiue/ y saltando a la siguiente palabra pulsando
+   el /SPC/.
+
+   #+begin_src lisp :tangle init.el
+     (setq-default ispell-program-name "aspell")
+     (setq ispell-dictionary "castellano")
+     (setq ispell-local-dictionary. "castellano")
+     (flyspell-mode 1)
+   #+end_src
+
+   Para más información [[https://gist.github.com/Ondiz/2fba1c143cd9d8682ea358082a202f1d][hunspell]].
