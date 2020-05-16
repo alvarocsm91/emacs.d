@@ -874,3 +874,22 @@
    #+begin_src lisp :tangle init.el
      ;;; Global features
    #+end_src
+
+** Global keys
+
+   Estos son comandos que permiten el uso de distintos elementos de forma
+   global, es decir, independientemente del modo de trabajo en el que estemos.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Global keys
+     ;; Cambia la fuente del buffer a su valor por defecto.
+     (global-set-key (kbd "C-=") (lambda () (interactive) (text-scale-adjust 0)))
+     ;; Maximiza las fuentes del buffer
+     (global-set-key (kbd "C-+") (lambda () (interactive) (text-scale-increase 0.5)))
+     ;; Minimiza las fuentes del buffer
+     (global-set-key (kbd "C--") (lambda () (interactive) (text-scale-decrease 0.5)))
+     ;; Cierra el buffer activo
+     (global-set-key (kbd "C-x k") #'kill-this-buffer)
+     ;; Abre magit mostrando el estado de la carpeta
+     (global-set-key (kbd "C-x g") #'magit-status)
+   #+end_src
