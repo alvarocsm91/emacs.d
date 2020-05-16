@@ -827,3 +827,16 @@
    #+end_src
 
    Para más información [[https://github.com/nschum/highlight-symbol.el][highlight-symbol]].
+
+** Google this
+
+   Se trata de un paquete que permite realizar búsquedas desde emacs.
+
+   #+begin_src lisp :tangle init.el
+     ;; Install package
+     (use-package google-this)
+     ;; Set active
+     (google-this-mode 1)
+   #+end_src
+
+   Para más información [[https://github.com/Malabarba/emacs-google-this][google-this]].
