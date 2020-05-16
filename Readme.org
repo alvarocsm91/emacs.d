@@ -1,3 +1,79 @@
-# emacs.d
+* Introducción
+# Comandos org para la exportación como *.pdf de este archivo.
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: Readme
+#+date: \today
+#+author: Álvaro Cortés Sánchez-Migallón
+#+email: alvarocsm.91@gmail.com
+#+language: es
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.0.50 (Org mode 9.3.6)
+#+latex_class: article
+#+latex_class_options:
+#+latex_header:
+#+latex_header_extra:
+#+description:
+#+keywords:
+#+subtitle:
+#+latex_compiler: pdflatex
 
-This repository strore my own emacs setup
+  Este documento es la guia para poder configurar emacs con mi propia
+  configuración, yo lo utilizo por ahora en mi ordenador sobre Fedora 31. La
+  versión que utilizo de emacs es la actual, intentando tener la última que
+  suele solucionar los errores detectados. Emacs 28.0.50 (Org mode 9.3.6)
+
+  Desde este archivo se pueden exportar los fragmentos de código para generar el
+  script que leerá Emacs para realizar la configuración, este archivo es
+  /init.el/ y se añade en el repositorio.
+
+* Configuración básica
+
+  En este apartado de configuran elementos básicos del sistema, sirve de ayuda
+  para poder realizar la lectura de variables de entorno del sistema o cargar
+  hasta el inicio de los repositorios donde se encuentran los paquetes que
+  posteriormente descargaremos para su uso.
+
+  Para poder realizar la localización de distintos archivos se genera la
+  variable que apunte a la raíz del sistema, para ello se extrae el valor de la
+  variable de entorno /HOME/.
+
+  #+begin_src lisp :tangle init.el
+    ;;; Basic setup
+    ;;;; Home directory
+    (setq MyHomeDir (getenv "HOME"))
+  #+end_src
+
+  Para la conexión a Internet desde detrás de un proxy se prueba a ver si se
+  tiene un fichero de configuración del proxy, mostrado a continuación.
+
+  #+begin_src lisp :tangle init.el
+    ;;;; Proxy
+    (when (file-exists-p (format "%s/.emacs.d/proxy.el" MyHomeDir))
+      (load-file (format "%s/.emacs.d/proxy.el" MyHomeDir)))
+  #+end_src
+
+  Para poder hacer uso de los ditintos paquetes es necesario cargar los
+  repositorios se utilizarán los paquetes de melpa, basado en paquetes no
+  oficiales soportados en git para el control de sus versiones. Se define la
+  carpeta de carga dentro de la carpeta /.emacs.d/, se descararán las últimas
+  versiones, por último se cargan los repositorios y se refrescan los contenidos.
+
+  #+begin_src lisp :tangle init.el
+    ;;;; Repositories
+    (require 'package)
+    (setq package-user-dir (format "%s/.emacs.d/elpa" MyHomeDir))
+
+    (setq load-prefer-newer t
+          package-enable-at-startup t)
+
+    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+    (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+    (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
+    (package-initialize)
+    (package-refresh-contents)
+  #+end_src
