@@ -521,11 +521,14 @@
 (set-selection-coding-system 'utf-8-unix)
 
 ;;;; Theme
-;;;;; Adaptative theme installation
-(when (file-exists-p (format "%s/.emacs.d/adaptative-theme/adaptativeTheme.el" MyHomeDir))
-  (load-file (format "%s/.emacs.d/adaptative-theme/adaptativeTheme.el" MyHomeDir)))
+(use-package gruvbox-theme)
+(use-package org-web-tools)
 
-(adaptative-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
+;;;;; Adaptative theme installation
+(when (file-exists-p (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
+  (adaptative-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
+  )
 
 ;; Start maximised
 (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)

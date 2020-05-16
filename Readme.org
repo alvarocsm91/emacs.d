@@ -1000,11 +1000,14 @@
 
    #+begin_src lisp :tangle init.el
      ;;;; Theme
-     ;;;;; Adaptative theme installation
-     (when (file-exists-p (format "%s/.emacs.d/adaptative-theme/adaptativeTheme.el" MyHomeDir))
-       (load-file (format "%s/.emacs.d/adaptative-theme/adaptativeTheme.el" MyHomeDir)))
+     (use-package gruvbox-theme)
+     (use-package org-web-tools)
 
-     (adaptative-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
+     ;;;;; Adaptative theme installation
+     (when (file-exists-p (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
+       (adaptative-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
+       )
    #+end_src
 
    Para más información [[https://github.com/greduan/emacs-theme-gruvbox][gruvbox-theme]] and [[https://github.com/alvarocsm91/adaptative-theme][adaptative-theme]].
