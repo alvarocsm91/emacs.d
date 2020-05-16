@@ -797,3 +797,16 @@
    #+end_src
 
    Para más información link
+
+** Mode-icons
+
+   Permite visualizar los iconos o imagenes de las miniaturas en función del
+   archivo que se tenga abierto.
+
+   #+begin_src lisp :tangle init.el
+     ;;;; Mode icons
+     (use-package mode-icons)
+     (mode-icons-mode)
+   #+end_src
+
+   Para más información [[https://github.com/ryuslash/mode-icons][mode-icons]].
