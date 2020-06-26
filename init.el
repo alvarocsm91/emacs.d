@@ -687,37 +687,56 @@
   (flycheck-define-checker vhdl-ghdl-custom
     "A custom VHDL syntax checker using ghdl."
     :command ("ghdl"
-          "-s" ; only do the syntax checking
-          "--std=08"
-          ;;"--std=93"
-          "--ieee=synopsys"
-          ;; "-fexplicit"
-          ;; "--workdir=work"
-          "-P/opt/CompiledLibraries/Vivado"
-          "--warn-unused"
-          source)
+              "-s" ; only do the syntax checking
+              "--std=08"
+              ;;"--std=93"
+              "--ieee=synopsys"
+              ;; "-fexplicit"
+              ;; "--workdir=work"
+              "-P/opt/CompiledLibraries/Vivado"
+              "--warn-unused"
+              source)
     :error-patterns
     ((error line-start (file-name) ":" line ":" column ": " (message) line-end))
     :modes vhdl-mode)
 
   ;; Finally, use one of "vhdl-ghdl" or "vhdl-ghdl-custom"
   (add-hook 'vhdl-mode-hook
-        (lambda ()
-          ;; Select ONLY one of:
-          (flycheck-select-checker 'vhdl-ghdl-custom)
-          ;; (flycheck-select-checker 'vhdl-ghdl)
-          )
-        ) ;; end add-hook
+            (lambda ()
+              ;; Select ONLY one of:
+              (flycheck-select-checker 'vhdl-ghdl-custom)
+              ;; (flycheck-select-checker 'vhdl-ghdl)
+              )
+            ) ;; end add-hook
   ) ;; end when
 
 ;;;; Python
-;;;;; Instal package
-(use-package elpy)
+;;;;; Instal packages
+(defvar myPackages
+  '(better-defaults                 ;; Set up some better Emacs defaults
+    py-autopep8                     ;; Run autopep8 on save
+    ein                             ;; Emacs IPython Notebook
+    )
+  )
 
-;;;;; Emacs IPython Notebook
-(use-package ein)
+(mapc #'(lambda (package)
+          (unless (package-installed-p package)
+            (package-install package)))
+      myPackages)
 
-;;;;; Enable package
+;;;;; Elpy
+;;;;;; Load module
+;; https://github.com/jorgenschaefer/elpy.git
+(when (file-exists-p (format "%s/.emacs.d/elpy/elpy.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/elpy/elpy.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/elpy/elpy-rpc.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/elpy/elpy-shell.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/elpy/elpy-profile.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/elpy/elpy-refactor.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/elpy/elpy-django.el" MyHomeDir))
+  )
+
+;;;;;; Enable package
 (elpy-enable)
 
 ;;;;; Use IPython for REPL
@@ -725,22 +744,30 @@
       python-shell-interpreter-args "console --simple-prompt"
       python-shell-prompt-detect-failure-warning nil)
 (add-to-list 'python-shell-completion-native-disabled-interpreters
-         "jupyter")
+             "jupyter")
 
 ;;;;; Enable flycheck mode
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
+;;;;; Enable autopep8
+(require 'py-autopep8)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+;;;;; Emacs IPython Notebook
+(use-package ein)
+
 ;;;;; Show trailing whitespaces
 (add-hook 'python-mode-hook
-      (lambda ()
-        (setq show-trailing-whitespace t)))
+          (lambda ()
+            (setq show-trailing-whitespace t)))
+
 ;;;;; Outshine
 (add-hook 'python-mode-hook
-      (lambda ()
-        (setq-local outline-regexp
-            "# [*]+")))
+          (lambda ()
+            (setq-local outline-regexp
+                        "# [*]+")))
 
 ;;;; Python
 
@@ -893,3 +920,16 @@
 ;;; Help
 (when (file-exists-p (format "%s/.emacs.d/my_help.el" MyHomeDir))
       (load-file (format "%s/.emacs.d/my_help.el" MyHomeDir)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(org-link-minor-mode whitespace-cleanup-mode which-key vhdl-capf use-package undo-tree super-save smartscan ripgrep poporg outshine org-web-tools org-plus-contrib multiple-cursors mode-icons magit-svn hydra highlight-symbol helm-rg helm-projectile helm-flycheck helm-ag gruvbox-theme google-translate google-this flycheck-pos-tip flycheck-color-mode-line elpy ein crux company-quickhelp auto-compile aggressive-indent aggressive-fill-paragraph)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

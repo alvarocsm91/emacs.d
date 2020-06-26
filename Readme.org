@@ -1233,17 +1233,39 @@
 
 ** Python
 
-   Falta por explicar la configuración del modo de trabajo.
+   En base al siguiente [[https://realpython.com/emacs-the-best-python-editor/][artículo]] he generado mi entorno de desarrollo de python
+   sobre emacs. He tenido que instalarlo desde las fuentes ya que me ha dado
+   problemas al no encontrar el paquete en el repositorio de melpa, por lo que
+   acceso al [[https://github.com/jorgenschaefer/elpy][github]] de la herramienta y la clono en la carpeta /.emacs.d/.
 
    #+begin_src lisp :tangle init.el
      ;;;; Python
-     ;;;;; Instal package
-     (use-package elpy)
+     ;;;;; Instal packages
+     (defvar myPackages
+       '(better-defaults                 ;; Set up some better Emacs defaults
+         py-autopep8                     ;; Run autopep8 on save
+         ein                             ;; Emacs IPython Notebook
+         )
+       )
 
-     ;;;;; Emacs IPython Notebook
-     (use-package ein)
+     (mapc #'(lambda (package)
+               (unless (package-installed-p package)
+                 (package-install package)))
+           myPackages)
 
-     ;;;;; Enable package
+     ;;;;; Elpy
+     ;;;;;; Load module
+     ;; https://github.com/jorgenschaefer/elpy.git
+     (when (file-exists-p (format "%s/.emacs.d/elpy/elpy.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/elpy/elpy.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/elpy/elpy-rpc.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/elpy/elpy-shell.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/elpy/elpy-profile.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/elpy/elpy-refactor.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/elpy/elpy-django.el" MyHomeDir))
+       )
+
+     ;;;;;; Enable package
      (elpy-enable)
 
      ;;;;; Use IPython for REPL
@@ -1251,22 +1273,30 @@
            python-shell-interpreter-args "console --simple-prompt"
            python-shell-prompt-detect-failure-warning nil)
      (add-to-list 'python-shell-completion-native-disabled-interpreters
-              "jupyter")
+                  "jupyter")
 
      ;;;;; Enable flycheck mode
      (when (require 'flycheck nil t)
        (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
        (add-hook 'elpy-mode-hook 'flycheck-mode))
 
+     ;;;;; Enable autopep8
+     (require 'py-autopep8)
+     (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+     ;;;;; Emacs IPython Notebook
+     (use-package ein)
+
      ;;;;; Show trailing whitespaces
      (add-hook 'python-mode-hook
-           (lambda ()
-             (setq show-trailing-whitespace t)))
+               (lambda ()
+                 (setq show-trailing-whitespace t)))
+
      ;;;;; Outshine
      (add-hook 'python-mode-hook
-           (lambda ()
-             (setq-local outline-regexp
-                 "# [*]+")))
+               (lambda ()
+                 (setq-local outline-regexp
+                             "# [*]+")))
 
      ;;;; Python
 
