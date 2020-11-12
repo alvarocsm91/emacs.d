@@ -917,9 +917,24 @@
 ;;(setq matlab-indent-function t)
 ;;(setq matlab-shell-command "matlab")
 
+;; From this link install matlab files:
+;; link: https://sourceforge.net/p/matlab-emacs/src/ci/master/tree/
+;; 1. In .emacs.d/ clone the repository.
+;; $ git clone https://git.code.sf.net/p/matlab-emacs/src matlab-emacs-src
+;; 2. Enter in matlab-emacs-src folder and do make:
+;; $ make
+
+;; Load Matlab files
+(when (file-exists-p (format "%s/.emacs.d/matlab-emacs-src" MyHomeDir))
+  (add-to-list 'load-path (format "%s/.emacs.d/matlab-emacs-src" MyHomeDir)))
+(load-library "matlab-load")
+
+;; Enable CEDET feature support for MATLAB code. (Optional)
+;; (matlab-cedet-setup)
+
 ;;; Help
 (when (file-exists-p (format "%s/.emacs.d/my_help.el" MyHomeDir))
-      (load-file (format "%s/.emacs.d/my_help.el" MyHomeDir)))
+  (load-file (format "%s/.emacs.d/my_help.el" MyHomeDir)))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
