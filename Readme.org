@@ -995,7 +995,7 @@
    Aquí se realiza la descarga del paquete de gruvbox que permite el uso de sus
    6 temas distintos, a mi me gusta el /dark-hard/ para por la noche y el
    /ligth-soft/ para el día. Para poder trabajar con los dos modos utilizo el
-   paquete /adaptative-theme/ para el uso combinado de temas claros y oscuros en
+   paquete /adaptive-theme/ para el uso combinado de temas claros y oscuros en
    función del cambio horario de mi localización.
 
    #+begin_src lisp :tangle init.el
@@ -1003,14 +1003,14 @@
      (use-package gruvbox-theme)
      (use-package org-web-tools)
 
-     ;;;;; Adaptative theme installation
-     (when (file-exists-p (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
-       (load-file (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
-       (adaptative-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
+     ;;;;; Adaptive theme installation
+     (when (file-exists-p (format "%s/.emacs.d/adaptive-theme/adaptive-theme.el" MyHomeDir))
+       (load-file (format "%s/.emacs.d/adaptive-theme/adaptive-theme.el" MyHomeDir))
+       (adaptive-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
        )
    #+end_src
 
-   Para más información [[https://github.com/greduan/emacs-theme-gruvbox][gruvbox-theme]] and [[https://github.com/alvarocsm91/adaptative-theme][adaptative-theme]].
+   Para más información [[https://github.com/greduan/emacs-theme-gruvbox][gruvbox-theme]] and [[https://github.com/alvarocsm91/adaptative-theme][adaptive-theme]].
 
 ** Appereance
 

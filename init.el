@@ -524,10 +524,10 @@
 (use-package gruvbox-theme)
 (use-package org-web-tools)
 
-;;;;; Adaptative theme installation
-(when (file-exists-p (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
-  (load-file (format "%s/.emacs.d/adaptative-theme/adaptative-theme.el" MyHomeDir))
-  (adaptative-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
+;;;;; Adaptive theme installation
+(when (file-exists-p (format "%s/.emacs.d/adaptive-theme/adaptive-theme.el" MyHomeDir))
+  (load-file (format "%s/.emacs.d/adaptive-theme/adaptive-theme.el" MyHomeDir))
+  (adaptive-theme-autolocation 'gruvbox-light-soft 'gruvbox-dark-hard)
   )
 
 ;; Start maximised
@@ -555,116 +555,116 @@
 ;;;; VHDL
 ;;;;; Cayetano's features
 
-  (use-package vhdl-mode
-    :defer t
+(use-package vhdl-mode
+  :defer t
   ;;; Config
-    :config
+  :config
   ;;;; Beautifying setting last semicolom to column 79 or not
-    ;; This variable toggles the functionality
-    (defvar csb/vhdl-beautify-shift-semicolom t
-      "When non nil, beautify shifts semicolon to column csb/vhdl-shift-semicolom-value. Indra compliant ...")
-    (defvar csb/vhdl-shift-semicolom-value 79
-      "Amount of shift to apply. Indra compliant ...")
-    ;; The executing function
-    (defun csb/vhdl-shift-semicolom (&optional start end)
-      (when csb/vhdl-beautify-shift-semicolom
-        (save-excursion
-          (goto-char (or start (point-min)))
-          (while (re-search-forward "[,;]$"
-                                    (if (region-active-p)
-                                        (region-end)
-                                      (point-max))
-                                    t)
-            (backward-char)
-            (indent-to-column csb/vhdl-shift-semicolom-value)
-            (forward-char)))))
-    ;; Advicing the beautifying function
-    (advice-add 'vhdl-beautify-region :after #'csb/vhdl-shift-semicolom)
+  ;; This variable toggles the functionality
+  (defvar csb/vhdl-beautify-shift-semicolom nil
+    "When non nil, beautify shifts semicolon to column csb/vhdl-shift-semicolom-value. Indra compliant ...")
+  (defvar csb/vhdl-shift-semicolom-value 79
+    "Amount of shift to apply. Indra compliant ...")
+  ;; The executing function
+  (defun csb/vhdl-shift-semicolom (&optional start end)
+    (when csb/vhdl-beautify-shift-semicolom
+      (save-excursion
+        (goto-char (or start (point-min)))
+        (while (re-search-forward "[,;]$"
+                                  (if (region-active-p)
+                                      (region-end)
+                                    (point-max))
+                                  t)
+          (backward-char)
+          (indent-to-column csb/vhdl-shift-semicolom-value)
+          (forward-char)))))
+  ;; Advicing the beautifying function
+  (advice-add 'vhdl-beautify-region :after #'csb/vhdl-shift-semicolom)
   ;;;; Major mode variables
-    (setq vhdl-basic-offset 2
-          vhdl-beautify-options '(t t t t nil)
-          vhdl-highlight-forbidden-words t
-          vhdl-highlight-special-words t
-          vhdl-highlight-translate-off t
-          vhdl-upper-case-constants t  ;; Non-nil means convert upper case.
-          vhdl-upper-case-types nil
-          vhdl-upper-case-keywords nil
-          vhdl-upper-case-attributes nil
-          vhdl-upper-case-enum-values nil)
+  (setq vhdl-basic-offset 2
+        vhdl-beautify-options '(t t t t nil)
+        vhdl-highlight-forbidden-words t
+        vhdl-highlight-special-words t
+        vhdl-highlight-translate-off t
+        vhdl-upper-case-constants t  ;; Non-nil means convert upper case.
+        vhdl-upper-case-types nil
+        vhdl-upper-case-keywords nil
+        vhdl-upper-case-attributes nil
+        vhdl-upper-case-enum-values nil)
   ;;;; Helpful modes on by default
-    (vhdl-stutter-mode 1)
-    (vhdl-electric-mode 1)
+  (vhdl-stutter-mode 1)
+  (vhdl-electric-mode 1)
   ;;;; Completion at point with company, see below
-    ;; Declare a variable to limit the features for large files
-    (defvar csb/vhdl-max-lines-disable-features 1500
-      "Maximun number of lines in a file to allow all features.")
-    ;; Following previous variable
-    (when (require 'vhdl-capf)
-      (add-hook 'vhdl-mode-hook
-                (lambda ()
-                  (if (< (count-lines 1 (point-max))
-                         csb/vhdl-max-lines-disable-features)
-                      (progn
-                        (add-to-list
-                         (make-local-variable 'completion-at-point-functions)
-                         'vhdl-capf-main)
-                        ;; Make ‘company-backends’ local is critcal or else, you will
-                        ;; have completion in every major mode
-                        (make-local-variable 'company-backends)
-                        ;; set ‘company-capf’ first in list
-                        (delq 'company-capf company-backends)
-                        (add-to-list 'company-backends 'company-capf))
-                    ;; For large files, disable a couple of things
+  ;; Declare a variable to limit the features for large files
+  (defvar csb/vhdl-max-lines-disable-features 1500
+    "Maximun number of lines in a file to allow all features.")
+  ;; Following previous variable
+  (when (require 'vhdl-capf)
+    (add-hook 'vhdl-mode-hook
+              (lambda ()
+                (if (< (count-lines 1 (point-max))
+                       csb/vhdl-max-lines-disable-features)
                     (progn
-                      ;; Force standard for large files, fixes bug
-                      (setq-local vhdl-standard (quote (93 nil)))
-                      (company-mode -1)
-                      (aggressive-indent-mode -1)
-                      (flyspell-mode -1))))))
+                      (add-to-list
+                       (make-local-variable 'completion-at-point-functions)
+                       'vhdl-capf-main)
+                      ;; Make ‘company-backends’ local is critcal or else, you will
+                      ;; have completion in every major mode
+                      (make-local-variable 'company-backends)
+                      ;; set ‘company-capf’ first in list
+                      (delq 'company-capf company-backends)
+                      (add-to-list 'company-backends 'company-capf))
+                  ;; For large files, disable a couple of things
+                  (progn
+                    ;; Force standard for large files, fixes bug
+                    (setq-local vhdl-standard (quote (93 nil)))
+                    (company-mode -1)
+                    (aggressive-indent-mode -1)
+                    (flyspell-mode -1))))))
   ;;;; Show trailing whitespaces
-    (add-hook 'vhdl-mode-hook
-              (lambda ()
-                (setq show-trailing-whitespace t)))
+  (add-hook 'vhdl-mode-hook
+            (lambda ()
+              (setq show-trailing-whitespace t)))
   ;;;; Outshine
-    (add-hook 'vhdl-mode-hook
-              (lambda ()
-                (setq-local outline-regexp
-                            "^\\s-*--\\s-\\([*]\\{1,8\\}\\)\\s-\\(.*\\)$")))
+  (add-hook 'vhdl-mode-hook
+            (lambda ()
+              (setq-local outline-regexp
+                          "^\\s-*--\\s-\\([*]\\{1,8\\}\\)\\s-\\(.*\\)$")))
   ;;;; Custom beautify region, activating the paragraph first
-    (defun csb/vhdl-beautify-region (arg)
-      "Call beautify-region but auto activate region first.
+  (defun csb/vhdl-beautify-region (arg)
+    "Call beautify-region but auto activate region first.
            With a prefix ARG, fall back to previous behaviour."
-      (interactive "P")
-      (if (equal arg '(4))
-          (call-interactively 'vhdl-beautify-region)
-        (save-excursion
-          (when (not (region-active-p))
-            (mark-paragraph))
-          (call-interactively 'vhdl-beautify-region))))
+    (interactive "P")
+    (if (equal arg '(4))
+        (call-interactively 'vhdl-beautify-region)
+      (save-excursion
+        (when (not (region-active-p))
+          (mark-paragraph))
+        (call-interactively 'vhdl-beautify-region))))
   ;;;; Hydra
-    (defhydra csb/hydra-vhdl (:color blue)
-      "
+  (defhydra csb/hydra-vhdl (:color blue)
+    "
     _i_ndent   _I_nsert   _t_emplate   _f_ill   _b_eautify   _p_ort  _c_ompose   _F_ix  _m_odel  _M_ode   _a_lign  _?_
       "
-      ("i" (with-initial-minibuffer "vhdl indent") nil)
-      ("I" (with-initial-minibuffer "vhdl insert") nil)
-      ("t" (with-initial-minibuffer "vhdl template") nil)
-      ("f" (with-initial-minibuffer "vhdl fill") nil)
-      ("b" (with-initial-minibuffer "vhdl beautify") nil)
-      ("a" (with-initial-minibuffer "vhdl align") nil)
-      ("p" (with-initial-minibuffer "vhdl -port") nil)
-      ("c" (with-initial-minibuffer "vhdl compose") nil)
-      ("F" (with-initial-minibuffer "vhdl fix") nil)
-      ("m" (with-initial-minibuffer "vhdl model") nil)
-      ("M" (with-initial-minibuffer "vhdl mode$") nil)
-      ("?" vhdl-doc-mode nil)
-      ("q" nil nil))
+    ("i" (with-initial-minibuffer "vhdl indent") nil)
+    ("I" (with-initial-minibuffer "vhdl insert") nil)
+    ("t" (with-initial-minibuffer "vhdl template") nil)
+    ("f" (with-initial-minibuffer "vhdl fill") nil)
+    ("b" (with-initial-minibuffer "vhdl beautify") nil)
+    ("a" (with-initial-minibuffer "vhdl align") nil)
+    ("p" (with-initial-minibuffer "vhdl -port") nil)
+    ("c" (with-initial-minibuffer "vhdl compose") nil)
+    ("F" (with-initial-minibuffer "vhdl fix") nil)
+    ("m" (with-initial-minibuffer "vhdl model") nil)
+    ("M" (with-initial-minibuffer "vhdl mode$") nil)
+    ("?" vhdl-doc-mode nil)
+    ("q" nil nil))
   ;;;; Bindings
-    :bind (:map vhdl-mode-map
-                ([remap vhdl-beautify-region] . csb/vhdl-beautify-region)
-                ("C-c ?" . vhdl-doc-mode)
-                ("C-c C-h" . nil)
-                ("C-c v" . csb/hydra-vhdl/body)))
+  :bind (:map vhdl-mode-map
+              ([remap vhdl-beautify-region] . csb/vhdl-beautify-region)
+              ("C-c ?" . vhdl-doc-mode)
+              ("C-c C-h" . nil)
+              ("C-c v" . csb/hydra-vhdl/body)))
 
 (use-package vhdl-capf
   :defer t
@@ -753,7 +753,7 @@
 
 ;;;;; Enable autopep8
 (require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
 ;;;;; Emacs IPython Notebook
 (use-package ein)
@@ -925,8 +925,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("939ea070fb0141cd035608b2baabc4bd50d8ecc86af8528df9d41f4d83664c6a" "a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" default))
  '(package-selected-packages
-   '(org-link-minor-mode whitespace-cleanup-mode which-key vhdl-capf use-package undo-tree super-save smartscan ripgrep poporg outshine org-web-tools org-plus-contrib multiple-cursors mode-icons magit-svn hydra highlight-symbol helm-rg helm-projectile helm-flycheck helm-ag gruvbox-theme google-translate google-this flycheck-pos-tip flycheck-color-mode-line elpy ein crux company-quickhelp auto-compile aggressive-indent aggressive-fill-paragraph)))
+   '(py-autopep8 org-trello package-lint org-link-minor-mode whitespace-cleanup-mode which-key vhdl-capf use-package undo-tree super-save smartscan ripgrep poporg outshine org-web-tools org-plus-contrib multiple-cursors mode-icons magit-svn hydra highlight-symbol helm-rg helm-projectile helm-flycheck helm-ag gruvbox-theme google-translate google-this flycheck-pos-tip flycheck-color-mode-line elpy ein crux company-quickhelp auto-compile aggressive-indent aggressive-fill-paragraph)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
